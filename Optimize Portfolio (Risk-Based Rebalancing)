@@ -1,0 +1,13 @@
+// Simple function to optimize portfolio based on risk level
+function optimizePortfolio(assets) {
+  const highRiskAssets = assets.filter(asset => asset.riskLevel === 'high');
+  const lowRiskAssets = assets.filter(asset => asset.riskLevel === 'low');
+
+  // Rebalance portfolio: move 20% of high-risk assets to low-risk assets
+  const rebalanceAmount = highRiskAssets.length * 0.2;
+  
+  return {
+    highRisk: highRiskAssets.slice(0, highRiskAssets.length - rebalanceAmount),
+    lowRisk: [...lowRiskAssets, ...highRiskAssets.slice(0, rebalanceAmount)]
+  };
+}
