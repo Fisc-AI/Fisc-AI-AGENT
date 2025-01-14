@@ -1,0 +1,6 @@
+// Get wallet balance (in SOL) after connecting
+async function getWalletBalance(publicKey) {
+  const connection = new solanaWeb3.Connection(solanaWeb3.clusterApiUrl("mainnet-beta"));
+  const balance = await connection.getBalance(new solanaWeb3.PublicKey(publicKey));
+  console.log(`Wallet balance: ${balance / solanaWeb3.LAMPORTS_PER_SOL} SOL`);
+}
