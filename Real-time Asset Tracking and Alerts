@@ -1,0 +1,13 @@
+// Function to track asset price changes and alert user
+function trackAssetPrice(assetSymbol) {
+  const assetPriceUrl = `https://api.coingecko.com/api/v3/simple/price?ids=${assetSymbol}&vs_currencies=usd`;
+
+  fetch(assetPriceUrl)
+    .then(response => response.json())
+    .then(data => {
+      const price = data[assetSymbol].usd;
+      console.log(`Current price of ${assetSymbol}: $${price}`);
+      alert(`Price alert: ${assetSymbol} is now $${price}`);
+    })
+    .catch(error => console.error("Error fetching asset price:", error));
+}
