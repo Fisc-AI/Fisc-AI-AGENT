@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FiscAI Wallet Connection</title>
+  <script src="https://unpkg.com/@solana/web3.js"></script>
+</head>
+<body>
+  <h1>Welcome to FiscAI</h1>
+  <button id="connectButton">Connect Phantom Wallet</button>
+  <p id="walletAddress"></p>
+
+  <script>
+    const connectButton = document.getElementById('connectButton');
+    const walletAddressDisplay = document.getElementById('walletAddress');
+
+    // Check if Phantom wallet is installed
+    if (window.solana && window.solana.isPhantom) {
+      console.log("Phantom wallet is installed.");
+
+      // Connect to the Phantom wallet
+      connectButton.addEventListener('click', async () => {
+        try {
+          const response = await window.solana.connect();
+          const publicKey = response.publicKey.toString();
+          console.log("Connected to Phantom wallet:", publicKey);
+          walletAddressDisplay.textContent = `Connected Wallet Address: ${publicKey}`;
+        } catch (error) {
+          console.error("Failed to connect to Phantom wallet:", error);
+        }
+      });
+    } else {
+      console.log("Phantom wallet is not installed.");
+      walletAddressDisplay.textContent = "Please install Phantom Wallet.";
+    }
+  </script>
+</body>
+</html>
